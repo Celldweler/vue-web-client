@@ -1,5 +1,6 @@
 const APIConfig = {
-    URL: "https://chat-api-project.azurewebsites.net/",
+    ApiUrl: import.meta.env.VITE_API_URL,
+    // SignalRUrl: `${this.ApiUrl}/chathub`    
 };
 
 export default APIConfig;
