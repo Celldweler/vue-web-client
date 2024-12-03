@@ -2,7 +2,8 @@
     <v-card class="chat-container" elevation="2">
         <v-card-title>Chat</v-card-title>
         <v-divider></v-divider>
-        <v-card-text class="chat-messages" style="height: 400px; overflow-y: auto;">
+        <div></div>
+        <v-card-text ref="chatContainer" class="chat-messages" style="height: 400px; overflow-y: auto;">
             <div v-for="(msg, index) in messages" :key="index" class="message">
                 <strong>{{ msg.username || "Anonymous" }}:</strong> {{ msg.text }}
             </div>
@@ -22,9 +23,11 @@
 
 <script setup>
 import axios from 'axios';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import APIRoutes from '@/config/APIRoutes';
 import SignalRHubConnection from '@/api-services/SignalRHubConnection';
+
+const chatContainer = ref(null);
 
 const messages = ref([]); // List of messages in the chat
 const createMessageModel = ref({
@@ -33,6 +36,15 @@ const createMessageModel = ref({
 })
 
 console.log('message:', createMessageModel.value);
+
+const scrollToBottom = () => {
+    nextTick(() => {
+        const container = chatContainer.value?.$el || chatContainer.value;
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
+    });
+};
 
 const sendMessage = () => {
     if (createMessageModel.value.text.trim()) {
@@ -43,6 +55,7 @@ const sendMessage = () => {
         }
         messages.value.push(newMessage);
         createMessageModel.value.text = '';
+        scrollToBottom();
     }
 
     SignalRHubConnection.then((connection) => {
@@ -62,8 +75,10 @@ onMounted(() => {
     axios.get(APIRoutes.getMessagesUrl())
         .then(res => {
             messages.value = res.data;
-            
+
             console.log(messages);
+
+            scrollToBottom();
         })
         .catch(er => console.log(er))
 
@@ -71,6 +86,7 @@ onMounted(() => {
         connection.on("ReceiveMessage", (user, message) => {
             console.log(`You got message: ${message} from ${user}`);
             messages.value.push({ senderName: user, text: message });
+            scrollToBottom();
         });
     });
 })
