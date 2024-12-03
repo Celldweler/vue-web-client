@@ -7,7 +7,7 @@
                 v-for="(msg, index) in messages"
                 :key="index"
                 class="message"
-                :style="{ backgroundColor: getMessageBackgroundColor(msg.textSentyment) }"
+                :style="{ backgroundColor: getMessageBackgroundColor(msg.textSentiment) }"
             >
                 <div style="display: flex; justify-content: space-between;">
                     <div>
