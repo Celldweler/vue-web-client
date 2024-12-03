@@ -11,7 +11,7 @@
             >
                 <div style="display: flex; justify-content: space-between;">
                     <div>
-                        <strong>{{ msg.username || "Anonymous" }}:</strong> {{ msg.text }}
+                        <strong>{{ msg.sender }}:</strong> {{ msg.text }}
                     </div>
 
                     <p>{{ formatTimestamp(msg.createdAt) }}</p>
@@ -59,7 +59,8 @@ const scrollToBottom = () => {
 
 const sendMessage = () => {
     if (createMessageModel.value.text.trim()) {
-
+        console.log(createMessageModel.value.senderName);
+        
         var newMessage = {
             senderName: createMessageModel.value.senderName || "Anonymous",
             text: createMessageModel.value.text.trim(),
