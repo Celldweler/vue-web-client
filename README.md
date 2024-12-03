@@ -1,29 +1,17 @@
-# vue-web-client
+# Real-time Chat App with Sentiment Analysis, Vue 3, Vuetify 3 and Azure SignalR
 
-This template should help get you started developing with Vue 3 in Vite.
+<p>Live Demo: <a href="https://agreeable-river-035354b03.5.azurestaticapps.net">https://vue-chat-app.com</a></p>
+<p><a href="chat-api-project.azurewebsites.net">Swagger</a></p>
 
-## Recommended IDE Setup
+### Tech Stack:
+- Vue 3 Composition API (script setup)
+- Vuetify 3
+- Azure SignalR
+- Axios for HTTP Requests 
+- vue-router
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Fully Async Backend with:
+- Asp.Net Core WebApi, Azure SignalR, .NET 8
+- Entity Framework Core
+- Azure Sql
+- Azure Cognitive Services Text Analytics API
